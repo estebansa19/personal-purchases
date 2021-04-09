@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   root to: 'purchases#index'
 
-  resources :purchases, only: [:create, :index]
+  namespace :api do
+    namespace :v1 do
+      resources :purchases, only: [:create, :index]
+    end
+  end
 end
