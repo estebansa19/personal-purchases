@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: 'purchases#index'
+  root to: 'api/v1/purchases#index'
 
   namespace :api do
     namespace :v1 do
