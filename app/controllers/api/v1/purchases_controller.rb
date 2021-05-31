@@ -1,8 +1,13 @@
 module Api
   module V1
     class PurchasesController < ApplicationController
+      # SELECT array_agg(value::text || COALESCE(' - ' || title::text, '')) as purchases, 
+      # date_trunc('month', created_at) as month FROM purchases GROUP BY month, created_at, title, value
+
       def index
-        render json: Purchase.all, status: :ok
+        @purchases = Purchase.
+          select(:title, :value, :created_at).
+          group_by { |purchase| purchase.created_at.strftime('%B - %Y') }
       end
     
       def create
