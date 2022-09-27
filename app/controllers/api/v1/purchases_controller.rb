@@ -14,7 +14,7 @@ module Api
         if purchase_params_valid? && purchases_record.save
           render json: purchases_record, status: :ok
         else
-          render json: purchase.errors.to_sentence, status: :unprocessable_entity
+          render json: purchases_record.errors.to_sentence, status: :unprocessable_entity
         end
       end
 
