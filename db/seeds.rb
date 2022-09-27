@@ -1,7 +1,22 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+current_time = Time.current
+purchases_attributes = [
+  {
+    title: 'food', value: 66666, created_at: current_time, updated_at: current_time
+  },
+  {
+    title: 'cellphone', value: 1000000, created_at: current_time, updated_at: current_time
+  },
+  {
+    title: 'clothes', value: 100000, created_at: current_time, updated_at: current_time
+  },
+  {
+    title: 'coffee', value: 10000, created_at: current_time, updated_at: current_time
+  },
+  {
+    title: 'transport', value: 100000, created_at: current_time, updated_at: current_time
+  }
+]
+
+monthly_purchase = MonthlyPurchase.find_or_create_by(month: Date.current.beginning_of_month)
+monthly_purchase.purchases << purchases_attributes
+monthly_purchase.save
