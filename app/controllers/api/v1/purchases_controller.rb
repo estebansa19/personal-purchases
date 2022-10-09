@@ -14,7 +14,7 @@ module Api
         if purchase_params_valid? && purchases_record.save
           render json: purchases_record, status: :ok
         else
-          render json: purchases_record.errors.to_sentence, status: :unprocessable_entity
+          render json: purchases_record.errors.full_messages.to_sentence, status: :unprocessable_entity
         end
       end
 
@@ -26,7 +26,7 @@ module Api
 
       def purchase_params_valid?
         return false if purchase_params[:title].blank? || purchase_params[:value].blank?
-        return false if !purchase_params[:value].is_a?(Numeric)
+        return false if !purchase_params[:value].try(:to_i).is_a?(Numeric)
 
         true
       end
